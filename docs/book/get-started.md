@@ -115,12 +115,19 @@ In addition to running queries, the REPL also lets you define rules:
 ```ruby
 > p[x] { a = [1,2,3,4]; a[x] }
 > p[x] > 1
-+---+
-| x |
-+---+
-| 2 |
-| 3 |
-+---+
+[marco@styras-MacBook-Pro tmp]$ ./opa run
+OPA 0.5.11 (commit 47e8e78, built at 2017-11-15T23:17:36Z)
+
+Run 'help' to see a list of commands.
+
+> p[x] { a = [1,2,3,4]; a[x] }
+> p[x] > 1
++------------+---+
+| __local0__ | x |
++------------+---+
+| null       | 2 |
+| null       | 3 |
++------------+---+
 ```
 
 The rule above defines a set of values that are the indices of elements in the array `a`.
@@ -214,19 +221,7 @@ For example if `i` has value `0` then `data.servers[i]` returns the first value 
 ```ruby
 > i = 0
 > data.servers[i]
-{
-  "id": "s1",
-  "name": "app",
-  "ports": [
-      "p1",
-      "p2",
-      "p3"
-  ],
-  "protocols": [
-      "https",
-      "ssh"
-  ]
-}
+true
 ```
 
 That same expression `data.servers[i]` when `i` has no value defines a query that returns all the values of `i` and `data.servers[i]`:
